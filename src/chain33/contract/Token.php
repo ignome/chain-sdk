@@ -10,6 +10,7 @@ class Token
     const CREATE_RAW_TOKEN_REVOKE_TX = '';
     const SEND_TO_ADDRESS = 'Chain33.SendToAddress';
     const CHAIN_QUERY = 'Chain33.Query';
+    const CHAIN_EXECER = 'token';
 
 
     /**
@@ -89,7 +90,7 @@ class Token
      * @author zhaeng <zhangf@disanbo.com>
      * @time: 2020/1/2 10:40
      */
-    public static function getAccountTokenAssets(string $address,string $execer = 'token')
+    public static function getAccountTokenAssets(string $address,string $execer = self::CHAIN_EXECER)
     {
         $params = [
             'execer' => $execer,
@@ -105,7 +106,7 @@ class Token
      * @author zhaeng <zhangf@disanbo.com>
      * @time: 2020/1/15 11:51
      */
-    public static function getTokens(string $execer)
+    public static function getTokens(string $execer = self::CHAIN_EXECER)
     {
         $params = [
             'execer' => $execer,
@@ -114,4 +115,51 @@ class Token
         ];
         return Request::sendRequest(self::CHAIN_QUERY,$params);
     }
+
+    /**
+     * @param string $symbol
+     * @param int $count
+     * @param string $addr
+     * @param $flag
+     * @param $height
+     * @param $index
+     * @param $direction
+     * @param $execer
+     * @return array
+     */
+    public static function getTxByToken(string $symbol, int $count, string $addr, $flag = 0, $height = -1, $index = 0, $direction = 0, $execer=self::CHAIN_EXECER)
+    {
+        $params = [
+            'execer' => $execer,
+            'funcName' => 'GetTokens',
+            'payload' => [
+                'symbol' => $symbol,
+                'count' => $count,
+                "flag" => $flag,
+                "height" => $height,
+                "index" => $index,
+                "direction" => $direction,
+                "addr" => $addr
+            ]
+        ];
+        return Request::sendRequest(self::CHAIN_QUERY,$params);
+    }
+
+    /**
+     * @param string $address
+     * @param $execer
+     * @return array
+     */
+    public static function getTokenInfo(string $address, $execer=self::CHAIN_EXECER)
+    {
+        $params = [
+            'execer' => $execer,
+            'funcName' => 'GetTokenInfo',
+            'payload' => [
+                "data" => $address
+            ]
+        ];
+        return Request::sendRequest(self::CHAIN_QUERY,$params);
+    }
+
 }

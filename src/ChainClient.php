@@ -73,6 +73,13 @@ use chain33\phpsdk\chain33\system\Wallet;
  * @method array getBlockOverview(string $hash)
  * @method array getBlockByHashes(array $hashes,bool $isDetail = false)
  *
+ * -----see [[Wallet]] end -------
+ *
+ * @method array createRawTokenPreCreateTx(string $name,string $symbol,string $introduction,int $total,int $price,string $owner,int $category)
+ * @method array createRawTokenFinishTx(string $symbol,string $owner)
+ * @method array getAccountTokenAssets(string $address)
+ * @method array getTxByToken(string $symbol, int $count, string $addr)
+ * @method array getTokenInfo(string $address)
  */
 class ChainClient
 {
