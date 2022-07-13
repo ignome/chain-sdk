@@ -48,6 +48,9 @@ use chain33\phpsdk\chain33\system\Wallet;
  * @method array saveSeed(string $seed,string $password)
  * @method array getSeed(string $password)
  * @method array getWalletStatus()
+ * @method array setTxFee(int $amount)
+ * @method array sendToAddress(string $from,string $to,int $amount,bool $isToken = false,string $tokenSymbol = '',string $note = '')
+ * @method array walletTxList(string $fromTx,int $count,int $direction)
  *
  * @method string privateKey()
  * @method string publicKey()
